@@ -46,6 +46,7 @@ class BMW extends Car {
 
 class CarFactory {
 
+    //简单工厂模式：一个具体工厂类，工厂方法为静态方法
     public static Car createCar(String carName) {
 
         Car car = null;

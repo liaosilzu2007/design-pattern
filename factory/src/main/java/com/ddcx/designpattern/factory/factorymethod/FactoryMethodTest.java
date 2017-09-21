@@ -9,7 +9,7 @@ public class FactoryMethodTest {
     public static void main(String[] args) {
 
         /*
-         * 制造汽车的过程很复杂，可能需要先制造它的组成部分，使用工厂模式可以将这些准备步骤隐藏起来，
+         * 当创建对象（比如汽车）比较复杂，比如可能需要先制造它的组成部分时，使用工厂模式可以将这些准备步骤隐藏起来，
          * 我们只需要去调用制造汽车的方法来制造汽车就行。
          */
         BenzCarFactory benzCarFactory = new BenzCarFactory();
@@ -59,6 +59,10 @@ abstract class Car {
     private Light light;
     private Conditioner conditioner;
 
+    public Car() {
+
+    }
+
     public Car(Engine engine, Light light, Conditioner conditioner) {
         this.engine = engine;
         this.light = light;
@@ -70,6 +74,10 @@ abstract class Car {
 }
 
 class Benz extends Car {
+
+    public Benz() {
+
+    }
 
     public Benz(Engine engine, Light light, Conditioner conditioner) {
         super(engine, light, conditioner);

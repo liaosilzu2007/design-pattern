@@ -8,110 +8,115 @@ public class AbstractFactoryTest {
 
     public static void main(String[] args) {
 
-        /*
-         * 制造汽车的过程很复杂，可能需要先制造它的组成部分，使用工厂模式可以将这些准备步骤隐藏起来，
-         * 我们只需要去调用制造汽车的方法来制造汽车就行。
-         */
-        BenzCarFactory benzCarFactory = new BenzCarFactory();
-        Car car = benzCarFactory.createCar();
-        car.getProduceInfo();
-
-        System.out.println("-------------------");
-
-        BMWCarFactory bmwCarFactory = new BMWCarFactory();
-        Car car1 = bmwCarFactory.createCar();
-        car1.getProduceInfo();
+        SportCarFactory sportCarFactory = new SportCarFactory();
+        BMWCar bmwCar = sportCarFactory.createBMWCar();
+        bmwCar.info();
     }
 }
 
 interface CarFactory {
-
-    public abstract Car createCar();
+    public abstract BenzCar createBenzCar();
+    public abstract BMWCar createBMWCar();
+    public abstract AudiCar createAudizCar();
 }
 
-class BenzCarFactory implements CarFactory {
-
+class SportCarFactory implements CarFactory {
 
     @Override
-    public Car createCar() {
-        Engine engine = new Engine();
-        Light light = new Light();
-        Conditioner conditioner = new Conditioner();
-        return new Benz(engine, light, conditioner);
-    }
-}
-
-class BMWCarFactory implements CarFactory {
-
-
-    @Override
-    public Car createCar() {
-        Engine engine = new Engine();
-        Light light = new Light();
-        Conditioner conditioner = new Conditioner();
-        return new BMW(engine, light, conditioner);
-    }
-}
-
-abstract class Car {
-
-    private Engine engine;
-    private Light light;
-    private Conditioner conditioner;
-
-    public Car(Engine engine, Light light, Conditioner conditioner) {
-        this.engine = engine;
-        this.light = light;
-        this.conditioner = conditioner;
-    }
-
-    protected abstract void getProduceInfo();
-
-}
-
-class Benz extends Car {
-
-    public Benz(Engine engine, Light light, Conditioner conditioner) {
-        super(engine, light, conditioner);
+    public BenzCar createBenzCar() {
+        return new BenzSportCar();
     }
 
     @Override
-    protected void getProduceInfo() {
-        System.out.println("制造了一辆Benz汽车");
-    }
-}
-
-
-class BMW extends Car {
-
-    public BMW(Engine engine, Light light, Conditioner conditioner) {
-        super(engine, light, conditioner);
+    public BMWCar createBMWCar() {
+        return new BMWSportCar();
     }
 
     @Override
-    protected void getProduceInfo() {
-        System.out.println("制造了一辆BMW汽车");
+    public AudiCar createAudizCar() {
+        return new AudiSportCar();
     }
 }
 
-/**
- * 汽车引擎系统
- */
-class Engine {
+class BusinessCarFactory implements CarFactory {
+
+    @Override
+    public BenzCar createBenzCar() {
+        return new BenzBusinessCar();
+    }
+
+    @Override
+    public BMWCar createBMWCar() {
+        return new BMWBusinessCar();
+    }
+
+    @Override
+    public AudiCar createAudizCar() {
+        return new AudiBusinessCar();
+    }
+}
+
+interface Car {
+    public abstract void info();
+}
+
+abstract class BenzCar implements Car {
 
 }
 
-/**
- * 汽车灯光系统
- */
-class Light {
+abstract class BMWCar implements Car {
 
 }
 
-/**
- * 汽车空调系统
- */
-class Conditioner {
+abstract class AudiCar implements Car {
 
+}
+
+class BenzSportCar extends BenzCar {
+
+    @Override
+    public void info() {
+        System.out.println("这是一辆Benz跑车");
+    }
+}
+
+class BenzBusinessCar extends BenzCar {
+
+    @Override
+    public void info() {
+        System.out.println("这是一辆Beaz商务车");
+    }
+}
+
+class BMWSportCar extends BMWCar {
+
+    @Override
+    public void info() {
+        System.out.println("这是一辆BMW跑车");
+    }
+}
+
+class BMWBusinessCar extends BMWCar {
+
+    @Override
+    public void info() {
+        System.out.println("这是一辆BMW商务车");
+    }
+}
+
+class AudiSportCar extends AudiCar {
+
+    @Override
+    public void info() {
+        System.out.println("这是一辆Audi跑车");
+    }
+}
+
+class AudiBusinessCar extends AudiCar {
+
+    @Override
+    public void info() {
+        System.out.println("这是一辆Audi商务车");
+    }
 }
 

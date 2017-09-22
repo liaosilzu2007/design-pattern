@@ -40,6 +40,9 @@ class Police implements Observer {
     }
 }
 
+/**
+ * 抽象的被观察者
+ */
 interface Subject {
 
     public void addObserver(Observer observer);
@@ -71,6 +74,7 @@ class Transporter implements Subject {
 
     @Override
     public void notifyObserver() {
+        System.out.println("运输队出发了!!!");
         for (Observer observer : observerList) {
             observer.update();
         }

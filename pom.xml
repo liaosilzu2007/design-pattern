@@ -16,6 +16,7 @@
         <module>observer</module>
         <module>singleton</module>
         <module>responsibility-chain</module>
+        <module>composite</module>
     </modules>
 
     <dependencies>
